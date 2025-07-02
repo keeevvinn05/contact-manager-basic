@@ -1,0 +1,19 @@
+#FRONTEND
+#Dependencias 
+node_modules/
+
+#Salidas de angular
+dist/
+out-tsc/
+.angular/
+
+#BACKEND
+#Archivos de datos de JSON_Server
+db.json
+
+# log de npm/yarn
+npm-debug.log*
+yarn-error-log*
+
+#ajustes locales de VScode
+.VScode/
