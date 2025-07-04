@@ -1,1 +1,48 @@
-<p>contact-list works!</p>
+<h2>Contactos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- Bucle de contactos con *ngFor -->
+    <tr *ngFor="let c of contacts">
+      
+      <!-- Si NO se está editando este contacto -->
+      <ng-container *ngIf="editID !== c.id; else editTpl">
+        <td>{{ c.name }}</td>
+        <td>{{ c.email }}</td>
+        <td>{{ c.phone }}</td>
+        <td>
+          <!-- Botón para activar el modo edición -->
+          <button (click)="startEdit(c)">Editar</button>
+          
+          <!-- Botón para borrar -->
+          <button (click)="delete(c)" [disabled]="loading">
+            {{ loading ? 'cargando...' : 'borrar' }}
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Plantilla alternativa si está en modo edición -->
+      <ng-template #editTpl>
+        <td><input [(ngModel)] = "name" /></td>
+        <td><input [(ngModel)] = "email"/></td>
+        <td><input [(ngModel)] = "phone"/></td>
+        <td>
+          <button (click)="save(c)">guardar</button>
+           <button (click)="cancel()">cancelar</button>
+          </td>
+         
+        
+      </ng-template>
+
+    </tr>
+  </tbody>
+</table>
