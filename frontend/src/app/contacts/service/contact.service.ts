@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 // Interfaz que define la estructura de un contacto
-export interface contact {
+export interface Contact {
   id?: number;          // ID opcional del contacto
   name: string;         // Nombre del contacto
   email: string;        // Correo del contacto
@@ -20,13 +20,19 @@ export class ContactService {
   constructor(private http: HttpClient) {} // Inyectamos el servicio HttpClient
 
   // Obtener todos los contactos
-  getAll(): Observable<contact[]> {
-    return this.http.get<contact[]>(this.api); // GET http://localhost:3001/contacts
+  getAll(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(this.api); // GET http://localhost:3001/contacts
+  }
+
+  // Añadir un nuevo contacto
+  add(c: Contact): Observable<Contact> {
+    // POST http://localhost:3001/contacts con el cuerpo c
+    return this.http.post<Contact>(this.api, c);
   }
 
   // Actualizar un contacto existente
-  update(c: contact): Observable<contact> {
-    return this.http.put<contact>(`${this.api}/${c.id}`, c); // PUT http://localhost:3001/contacts/:id
+  update(c: Contact): Observable<Contact> {
+    return this.http.put<Contact>(`${this.api}/${c.id}`, c); // PUT http://localhost:3001/contacts/:id
   }
 
   // Eliminar un contacto por ID
